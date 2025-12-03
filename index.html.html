@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasivos Ambientales y Costos Sociales - Realidad Nacional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50; /* Azul oscuro corporativo */
+            --secondary: #34495e;
+            --accent: #e74c3c; /* Rojo para alertas/costos */
+            --green-eco: #27ae60; /* Verde para dinero/beneficios */
+            --light: #ecf0f1;
+            --dark-text: #333;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        header {
+            /* Imagen de fondo impactante */
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://source.unsplash.com/1600x900/?open+pit+mine');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+        }
+        header h1 { font-size: 3.5em; margin-bottom: 10px; font-weight: 700; }
+        header p { font-size: 1.5em; font-weight: 300; }
+        
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px 20px; background: white; box-shadow: 0 0 20px rgba(0,0,0,0.05); margin-top: -50px; border-radius: 8px; }
+        
+        h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 40px; }
+        .intro-text { font-size: 1.1em; color: var(--secondary); margin-bottom: 30px; }
+
+        /* Estilos para imágenes */
+        .content-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .caption { font-size: 0.9em; color: #7f8c8d; text-align: center; font-style: italic; margin-top: -15px; margin-bottom: 30px; }
+
+        /* --- Sección Interactiva 1: Tarjetas --- */
+        .cards-intro { text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--accent); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+            text-align: center;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(44, 62, 80, 0.2); }
+        .card-icon { font-size: 3em; margin-bottom: 15px; display: block; }
+        .card h3 { margin: 10px 0; color: var(--primary); }
+        
+        .detail-box {
+            background: var(--secondary);
+            color: white;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 8px;
+            display: none; /* Oculto por defecto */
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .detail-box h3 { color: var(--accent); margin-top: 0; }
+        .detail-data { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 5px; margin-top: 20px; font-size: 0.9em; }
+
+        /* --- Sección Interactiva 2: Gráfico de Barras --- */
+        .chart-section { background: #f0f2f5; padding: 30px; border-radius: 15px; margin-top: 40px; }
+        .chart-container { display: flex; flex-direction: column; gap: 30px; margin-top: 30px; }
+        .chart-row { display: flex; align-items: center; }
+        .chart-label { width: 25%; font-weight: bold; color: var(--primary); }
+        .chart-bar-area { width: 75%; background: #dce1e6; height: 35px; border-radius: 20px; overflow: hidden; position: relative;box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); }
+        .chart-bar { height: 100%; transition: width 1.5s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; align-items: center; justify-content: flex-end; padding-right: 15px; color: white; font-weight: bold; }
+        .bar-eco { background: linear-gradient(to right, #2ecc71, var(--green-eco)); width: 85%; }
+        .bar-social { background: linear-gradient(to right, #e74c3c, #c0392b); width: 15%; }
+        
+        .btn-reveal {
+            display: block; width: 100%; max-width: 400px; margin: 30px auto 0; padding: 15px 30px;
+            background-color: var(--primary); color: white; border: none; border-radius: 50px;
+            cursor: pointer; font-size: 1.1rem; font-weight: bold; transition: background 0.3s; box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+        .btn-reveal:hover { background-color: var(--accent); transform: scale(1.02); }
+
+        /* --- Sección 3: Acordeón --- */
+        details {
+            background: #fff; margin-bottom: 10px; border-radius: 5px; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        summary {
+            padding: 15px; cursor: pointer; font-weight: bold; color: var(--primary); outline: none;
+        }
+        details[open] summary { background: var(--light); color: var(--accent); }
+        .details-content { padding: 15px; color: var(--secondary); font-size: 0.95em; }
+
+        footer { text-align: center; padding: 40px 20px; background: var(--primary); color: rgba(255,255,255,0.7); margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Desigualdad y Huella Oculta</h1>
+    <p>Evaluación de Pasivos Ambientales y Costos Sociales de la Minería en el Perú</p>
+</header>
+
+<div class="container">
+    <section>
+        <h2>1. El Legado Invisible: Pasivos Ambientales Mineros (PAM)</h2>
+        <p class="intro-text">
+            La riqueza mineral extraída genera divisas hoy, pero deja "deudas" ambientales que pueden durar siglos. En el Perú, la empresa estatal AMSAC se encarga de remediar los PAMs de alto riesgo que las empresas privadas dejaron abandonados antes de que existieran leyes ambientales estrictas.
+        </p>
+        
+        <img src="pasivos mineros.jpg" alt="Pasivo Ambiental Minero" class="content-image">
+        <p class="caption">Figura 1: Representación de un depósito de relaves abandonado.</p>
+
+        <p class="cards-intro">👇 Haz clic en las tarjetas para explorar los impactos y datos clave 👇</p>
+        
+        <div class="grid">
+            <div class="card" onclick="showDetail('agua')">
+                <span class="card-icon">💧</span>
+                <h3>Contaminación Hídrica</h3>
+                <p>El impacto más crítico y difuso en cuencas andinas.</p>
+            </div>
+            <div class="card" onclick="showDetail('suelo')">
+                <span class="card-icon">🍂</span>
+                <h3>Degradación de Suelos</h3>
+                <p>Pérdida irreversible de la capacidad agrícola.</p>
+            </div>
+            <div class="card" onclick="showDetail('salud')">
+                <span class="card-icon">🫁</span>
+                <h3>Impacto en la Salud (Social)</h3>
+                <p>Metales pesados en poblaciones vulnerables.</p>
+            </div>
+        </div>
+
+        <div id="detail-display" class="detail-box">
+            <h3 id="detail-title">Título</h3>
+            <div id="detail-text">Texto descriptivo...</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. La "Contabilidad Falsa": Beneficios vs. Costos Reales</h2>
+        <p class="intro-text">
+            La contabilidad tradicional solo ve el flujo de caja (impuestos, canon). Los economistas llamamos a los daños ambientales "externalidades negativas" porque la empresa minera no paga por ellos; los "externaliza" a la sociedad y al Estado.
+        </p>
+
+        <div style="display: flex; gap: 10px; margin: 20px 0;">
+            <img src="AcomipeMitosobreamineriaformalDestacadaAbridora.jpg" style="width: 50%; border-radius: 8px; object-fit: cover;" alt="Riqueza">
+            <img src="protesta.jpg" style="width: 50%; border-radius: 8px; object-fit: cover;" alt="Pobreza y Contaminación">
+        </div>
+        <p class="caption">Figura 2: La paradoja de la riqueza minera frente a la realidad local.</p>
+
+        <div class="chart-section">
+            <h3>Simulación de Valoración de un Proyecto Minero</h3>
+            <p>Visualicemos cómo cambia la percepción de rentabilidad cuando "internalizamos" los costos ocultos.</p>
+            
+            <div class="chart-container">
+                <div class="chart-row">
+                    <div class="chart-label">Beneficio Económico Visible (PBI, Canon)</div>
+                    <div class="chart-bar-area">
+                        <div class="chart-bar bar-eco" id="ecoBar"><span id="ecoPct">85%</span></div>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label">Costo Social y Ambiental (Pasivos, Conflictos)</div>
+                    <div class="chart-bar-area">
+                        <div class="chart-bar bar-social" id="socialBar"><span id="socialPct">15%</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-reveal" onclick="revealTrueCost()">📉 Revelar el Costo Real (Internalizar Externalidades)</button>
+             <p id="chart-analysis" style="text-align: center; margin-top: 20px; font-style: italic; color: var(--accent); display: none;">Al monetizar los daños a la salud, la pérdida de productividad agraria a futuro y el costo de los conflictos sociales (según datos de Defensoría), el "costo" real del proyecto supera o iguala a sus beneficios netos para la región.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. ¿Cómo le ponemos precio a lo invaluable?</h2>
+        <p class="intro-text">No existe un mercado donde se compre "aire limpio de los Andes" o "salud infantil". Por eso, la economía ambiental utiliza metodologías indirectas para la Valoración Económica del Impacto Ambiental (VEIA).</p>
+
+        <details>
+            <summary>📌 Método de Costo de Enfermedad / Capital Humano</summary>
+            <div class="details-content">
+                <p>Calcula cuánto gasta el Estado y las familias en tratamientos médicos (ej. tratamiento por plomo en sangre) y cuánto dinero se pierde por los días laborales no trabajados debido a enfermedades respiratorias causadas por la minería.</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>📌 Método de Precios Hedónicos</summary>
+            <div class="details-content">
+                <p>Analiza cómo el mercado inmobiliario reacciona a la contaminación. Se compara el precio de viviendas idénticas, una cerca a un pasivo ambiental y otra lejos. La diferencia de precio es el valor implícito que la gente le da a vivir sin contaminación.</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>📌 Valoración Contingente (Encuestas)</summary>
+            <div class="details-content">
+                <p>Se crean mercados hipotéticos mediante encuestas directas a la población afectada: "¿Cuánto estaría dispuesto a pagar (WTP) para evitar que se contamine su río?" o "¿Cuánto estaría dispuesto a aceptar como compensación (WTA) por la pérdida de su calidad ambiental?".</p>
+            </div>
+        </details>
+    </section>
+</div>
+
+<footer>
+    <p>Exposición Grupal: Desigualdad Regional en Zonas Mineras.<br>
+    <strong>Curso de Realidad Nacional y Mundial - Universidad Peruana</strong></p>
+</footer>
+
+<script>
+    // --- Lógica de la Sección 1: Detalles ---
+    function showDetail(type) {
+        const display = document.getElementById('detail-display');
+        const title = document.getElementById('detail-title');
+        const text = document.getElementById('detail-text');
+        
+        display.style.display = 'block';
+        display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        if(type === 'agua') {
+            title.innerHTML = "💧 Drenaje Ácido de Roca (DAR)";
+            text.innerHTML = `
+                <p>Cuando los sulfuros de las rocas excavadas entran en contacto con el aire y el agua, generan ácido sulfúrico. Esto disuelve metales pesados (arsénico, cadmio, plomo) que terminan en los ríos.</p>
+                <div class="detail-data">
+                    <strong>Dato de Realidad Nacional:</strong> Según la Autoridad Nacional del Agua (ANA), numerosas cuencas hidrográficas en el Perú superan los Estándares de Calidad Ambiental (ECA) debido a pasivos históricos, afectando el riego y el consumo humano aguas abajo.
+                </div>
+            `;
+        } else if(type === 'suelo') {
+            title.innerHTML = "🍂 Esterilización del Territorio";
+            text.innerHTML = `
+                <p>Los depósitos de relaves (desechos químicos del procesamiento) ocupan grandes extensiones de terreno, inutilizándolas para la agricultura o ganadería de por vida. La remediación es extremadamente costosa.</p>
+                 <div class="detail-data">
+                    <strong>Dato AMSAC:</strong> La empresa estatal Activos Mineros S.A.C. (AMSAC) gestiona la remediación de cientos de pasivos de alto riesgo que el sector privado abandonó. Es un costo que el Estado peruano ha tenido que asumir.
+                </div>
+            `;
+        } else if(type === 'salud') {
+            title.innerHTML = "🫁 Costo Social: Salud Pública";
+            text.innerHTML = `
+                <p>La exposición crónica a metales pesados afecta el desarrollo cognitivo en niños y causa enfermedades irreversibles en adultos. Esto genera un costo social inmenso que satura el sistema de salud público.</p>
+                 <div class="detail-data">
+                    <strong>Caso Emblemático:</strong> Cerro de Pasco y La Oroya son ejemplos mundiales donde generaciones enteras presentan niveles de plomo en sangre muy por encima de lo permitido por la OMS, generando un ciclo de pobreza y enfermedad.
+                </div>
+            `;
+        }
+    }
+
+    // --- Lógica de la Sección 2: Gráfico Interactivo ---
+    function revealTrueCost() {
+        const ecoBar = document.getElementById('ecoBar');
+        const socialBar = document.getElementById('socialBar');
+        const ecoPct = document.getElementById('ecoPct');
+        const socialPct = document.getElementById('socialPct');
+        const analysis = document.getElementById('chart-analysis');
+        const btn = document.querySelector('.btn-reveal');
+        
+        // Cambiamos los anchos de las barras
+        ecoBar.style.width = "45%";
+        socialBar.style.width = "80%"; 
+
+        // Cambiamos los porcentajes numéricos
+        ecoPct.innerText = "45% (Neto Real)";
+        socialPct.innerText = "Letalmente Alto (Internalizado)";
+        
+        // Cambiamos colores
+        ecoBar.style.background = "linear-gradient(to right, #f1c40f, #d35400)"; 
+        socialBar.style.background = "linear-gradient(to right, #c0392b, #a93226)"; 
+        
+        // Mostramos el análisis
+        analysis.style.display = "block";
+        analysis.style.animation = "fadeIn 1s";
+        
+        // Deshabilitamos el botón
+        btn.innerText = "Costos Internalizados ✓";
+        btn.disabled = true;
+        btn.style.backgroundColor = "#34495e"; // CORREGIDO: Usamos un código de color válido, no una variable CSS
+        btn.style.cursor = "default";
+    }
+</script>
+
+</body>
+</html>
